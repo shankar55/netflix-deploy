@@ -734,22 +734,39 @@ To deploy an application with ArgoCD, you can follow these steps, which I'll out
 
 ### Deploy Application with ArgoCD
 
-1. **Install ArgoCD:**
+1. **Install ArgoCD:**  
+   a. **Linux**
 
    You can install ArgoCD on your Kubernetes cluster by following the instructions provided in the [EKS Workshop](https://archive.eksworkshop.com/intermediate/290_argocd/install/) documentation.
 
-2. **Set Your GitHub Repository as a Source:**
+   b. **Windows**  
+   **Installing jq on Windows using Chocolatey**
+Before running the commands below, make sure you have Chocolatey installed. If not, you can install Chocolatey by following the instructions [here](https://chocolatey.org/install).
+
+```powershell
+# Install jq using Chocolatey
+choco install jq -y
+# Get the ArgoCD server hostname
+$ARGOCD_SERVER = kubectl get svc argocd-server -n argocd -o json | jq --raw-output '.status.loadBalancer.ingress[0].hostname'
+Write-Host "ArgoCD Server: $ARGOCD_SERVER"
+
+# Retrieve the ArgoCD admin password
+$ARGOCD_PASSWORD = kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | ForEach-Object { [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($_)) }
+Write-Host "ArgoCD Admin Password: $ARGOCD_PASSWORD"
+```
+
+3. **Set Your GitHub Repository as a Source:**
 
    After installing ArgoCD, you need to set up your GitHub repository as a source for your application deployment. This typically involves configuring the connection to your repository and defining the source for your ArgoCD application. The specific steps will depend on your setup and requirements.
 
-3. **Create an ArgoCD Application:**
+4. **Create an ArgoCD Application:**
    - `name`: Set the name for your application.
    - `destination`: Define the destination where your application should be deployed.
    - `project`: Specify the project the application belongs to.
    - `source`: Set the source of your application, including the GitHub repository URL, revision, and the path to the application within the repository.
    - `syncPolicy`: Configure the sync policy, including automatic syncing, pruning, and self-healing.
 
-4. **Access your Application**
+5. **Access your Application**
    - To Access the app make sure port 30007 is open in your security group and then open a new tab paste your NodeIP:30007, your app should be running.
 
 **Phase 7: Cleanup**
