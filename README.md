@@ -96,7 +96,8 @@ docker build --build-arg TMDB_V3_API_KEY=<your-api-key> -t netflix .
         To access: 
         
         publicIP:9000 (by default username & password is admin)
-        
+        <img src="./public/assets/sonarqube.PNG" alt="sonarqube" width="100%" height="100%">
+
         To install Trivy:
         ```
         sudo apt-get install wget apt-transport-https gnupg lsb-release
@@ -559,6 +560,8 @@ sudo systemctl restart jenkins
    You can access Prometheus targets at:
 
    `http://<your-prometheus-ip>:9090/targets`
+    <img src="./public/assets/prometheus.PNG" alt="Logo" width="100%" height="100%">
+
 
 
 ####Grafana
@@ -673,6 +676,9 @@ Grafana is a powerful tool for creating visualizations and dashboards, and you c
 
 That's it! You've successfully installed and set up Grafana to work with Prometheus for monitoring and visualization.
 
+  <img src="./public/assets/grafana.PNG" alt="Logo" width="100%" height="100%">
+
+
 2. **Configure Prometheus Plugin Integration:**
     - Integrate Jenkins with Prometheus to monitor the CI/CD pipeline.
 
@@ -765,6 +771,8 @@ Write-Host "ArgoCD Admin Password: $ARGOCD_PASSWORD"
    - `project`: Specify the project the application belongs to.
    - `source`: Set the source of your application, including the GitHub repository URL, revision, and the path to the application within the repository.
    - `syncPolicy`: Configure the sync policy, including automatic syncing, pruning, and self-healing.
+   -   <img src="./public/assets/argocd.PNG" alt="Logo" width="100%" height="100%">
+
 
 5. **Access your Application**
    - To Access the app make sure port 30007 is open in your security group and then open a new tab paste your NodeIP:30007, your app should be running.
